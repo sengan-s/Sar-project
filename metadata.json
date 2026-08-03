@@ -1,0 +1,6 @@
+{
+  "name": "SAR Disaster Intelligence Platform Prototype",
+  "description": "AI-Powered Synthetic Aperture Radar (SAR) Disaster Intelligence Platform prototype demonstrating Module 1 (Data Acquisition & Preprocessing) and Module 2 (PHYS-Net Preprocessing Engine).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

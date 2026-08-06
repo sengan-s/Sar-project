@@ -41,7 +41,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-black">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-red-600 selection:text-white">
       {/* Top Navbar */}
       <Navbar
         activeTab={activeTab}
@@ -76,12 +76,13 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-900 border-t border-slate-800 py-4 px-6 text-center text-xs text-slate-500 font-mono">
+      <footer className="bg-slate-900/80 border-t border-red-950/80 py-4 px-6 text-center text-xs text-slate-400 font-mono">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div>
-            AI-Powered SAR Disaster Intelligence Platform &bull; College Research Demonstration Prototype
+          <div className="flex items-center space-x-2">
+            <span className="inline-block w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+            <span>AI-Powered SAR Disaster Intelligence Platform &bull; Red Alert Disaster Intelligence</span>
           </div>
-          <div>
+          <div className="text-red-400/80">
             Module 1: Ingestion & Quality Audit | Module 2: PHYS-Net Preprocessing Engine
           </div>
         </div>

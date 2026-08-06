@@ -148,11 +148,11 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
   return (
     <div className="space-y-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
+      <div className="bg-slate-900 border border-red-900/30 rounded-xl p-6 shadow-md shadow-red-950/20">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
-              <span className="text-xs font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800 font-semibold">
+              <span className="text-xs font-mono px-2 py-0.5 rounded bg-red-950 text-red-400 border border-red-800/80 font-bold">
                 MODULE 1
               </span>
               <h1 className="text-xl font-bold text-slate-100">
@@ -164,8 +164,8 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
             </p>
           </div>
 
-          <div className="hidden lg:flex items-center space-x-2 text-xs text-slate-400 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-            <Info className="w-4 h-4 text-cyan-400 shrink-0" />
+          <div className="hidden lg:flex items-center space-x-2 text-xs text-slate-400 bg-slate-950 p-2.5 rounded-lg border border-red-900/30">
+            <Info className="w-4 h-4 text-red-400 shrink-0" />
             <span>Accepts 8-bit / 16-bit grayscale SAR geotiffs, PNGs, and JPGs.</span>
           </div>
         </div>
@@ -174,9 +174,9 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Form Column (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
-          <form onSubmit={handleUploadSubmit} className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6">
+          <form onSubmit={handleUploadSubmit} className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6 shadow-sm">
             <h2 className="text-base font-semibold text-slate-200 flex items-center space-x-2">
-              <Upload className="w-4 h-4 text-cyan-400" />
+              <Upload className="w-4 h-4 text-red-400" />
               <span>1. Image File Selection</span>
             </h2>
 
@@ -185,13 +185,13 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
               {/* SAR File Dropzone */}
               <div className="space-y-2">
                 <label className="block text-xs font-medium text-slate-300">
-                  Raw SAR Image File <span className="text-cyan-400">*Required</span>
+                  Raw SAR Image File <span className="text-red-400">*Required</span>
                 </label>
                 <div
                   className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors relative ${
                     sarFile
-                      ? 'border-cyan-500/60 bg-cyan-950/20'
-                      : 'border-slate-700 hover:border-slate-500 bg-slate-950/50'
+                      ? 'border-red-500/60 bg-red-950/30'
+                      : 'border-slate-700 hover:border-red-600/50 bg-slate-950/50'
                   }`}
                 >
                   <input
@@ -205,14 +205,14 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
                       <img
                         src={sarPreviewUrl}
                         alt="SAR Preview"
-                        className="h-28 mx-auto rounded border border-slate-700 object-cover"
+                        className="h-28 mx-auto rounded border border-red-800/60 object-cover"
                       />
                       <p className="text-xs text-slate-300 font-mono truncate">{sarFile?.name}</p>
-                      <p className="text-[10px] text-cyan-400">Click to change SAR file</p>
+                      <p className="text-[10px] text-red-400 font-medium">Click to change SAR file</p>
                     </div>
                   ) : (
                     <div className="space-y-2 py-4">
-                      <Satellite className="w-8 h-8 mx-auto text-cyan-400 opacity-80" />
+                      <Satellite className="w-8 h-8 mx-auto text-red-400 opacity-90" />
                       <div className="text-xs text-slate-300 font-medium">Drop raw SAR image here</div>
                       <p className="text-[10px] text-slate-500">Grayscale PNG, JPG, or geotiff</p>
                     </div>
@@ -228,8 +228,8 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
                 <div
                   className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors relative ${
                     opticalFile
-                      ? 'border-emerald-500/60 bg-emerald-950/20'
-                      : 'border-slate-700 hover:border-slate-500 bg-slate-950/50'
+                      ? 'border-red-500/60 bg-red-950/30'
+                      : 'border-slate-700 hover:border-red-600/50 bg-slate-950/50'
                   }`}
                 >
                   <input
@@ -243,14 +243,14 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
                       <img
                         src={opticalPreviewUrl}
                         alt="Optical Preview"
-                        className="h-28 mx-auto rounded border border-slate-700 object-cover"
+                        className="h-28 mx-auto rounded border border-red-800/60 object-cover"
                       />
                       <p className="text-xs text-slate-300 font-mono truncate">{opticalFile?.name}</p>
-                      <p className="text-[10px] text-emerald-400">Click to change optical pair</p>
+                      <p className="text-[10px] text-red-400 font-medium">Click to change optical pair</p>
                     </div>
                   ) : (
                     <div className="space-y-2 py-4">
-                      <ImageIcon className="w-8 h-8 mx-auto text-emerald-400 opacity-80" />
+                      <ImageIcon className="w-8 h-8 mx-auto text-rose-400 opacity-80" />
                       <div className="text-xs text-slate-300 font-medium">Drop optical reference image</div>
                       <p className="text-[10px] text-slate-500">Sentinel-2 / PlanetScope RGB</p>
                     </div>
@@ -262,7 +262,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
             <div className="border-t border-slate-800 pt-5 space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-base font-semibold text-slate-200 flex items-center space-x-2">
-                  <MapPin className="w-4 h-4 text-amber-400" />
+                  <MapPin className="w-4 h-4 text-red-400" />
                   <span>2. Geographic & Sensor Metadata</span>
                 </h2>
 
@@ -272,21 +272,21 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
                   <button
                     type="button"
                     onClick={() => setLocationPreset('flood')}
-                    className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-cyan-400 text-[11px]"
+                    className="px-2 py-0.5 rounded bg-red-950/60 hover:bg-red-900/80 border border-red-800/50 text-red-300 text-[11px]"
                   >
                     Flood
                   </button>
                   <button
                     type="button"
                     onClick={() => setLocationPreset('turkey')}
-                    className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 text-[11px]"
+                    className="px-2 py-0.5 rounded bg-red-950/60 hover:bg-red-900/80 border border-red-800/50 text-amber-300 text-[11px]"
                   >
                     Quake
                   </button>
                   <button
                     type="button"
                     onClick={() => setLocationPreset('greece')}
-                    className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-emerald-400 text-[11px]"
+                    className="px-2 py-0.5 rounded bg-red-950/60 hover:bg-red-900/80 border border-red-800/50 text-rose-300 text-[11px]"
                   >
                     Fire
                   </button>
@@ -301,7 +301,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
                     type="text"
                     value={locationName}
                     onChange={(e) => setLocationName(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-slate-200 focus:outline-none focus:border-cyan-500"
+                    className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-slate-200 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500"
                   />
                 </div>
 
@@ -311,7 +311,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
                     <select
                       value={sensorSource}
                       onChange={(e) => setSensorSource(e.target.value as any)}
-                      className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-slate-200 focus:outline-none focus:border-cyan-500"
+                      className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-slate-200 focus:outline-none focus:border-red-500"
                     >
                       <option value="Sentinel-1A">Sentinel-1A (C-Band)</option>
                       <option value="Sentinel-1B">Sentinel-1B (C-Band)</option>
@@ -327,7 +327,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
                     <select
                       value={polarization}
                       onChange={(e) => setPolarization(e.target.value as any)}
-                      className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-slate-200 focus:outline-none focus:border-cyan-500"
+                      className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-slate-200 focus:outline-none focus:border-red-500"
                     >
                       <option value="VV">VV (Vertical-Vertical)</option>
                       <option value="VH">VH (Vertical-Horizontal)</option>
@@ -393,7 +393,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
                     type="text"
                     value={acquisitionDate}
                     onChange={(e) => setAcquisitionDate(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-slate-200 font-mono text-xs focus:outline-none focus:border-cyan-500"
+                    className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-slate-200 font-mono text-xs focus:outline-none focus:border-red-500"
                   />
                 </div>
               </div>
@@ -401,7 +401,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
 
             {/* Error banner */}
             {errorMessage && (
-              <div className="bg-red-950/60 border border-red-800 text-red-300 text-xs p-3 rounded-lg flex items-center space-x-2">
+              <div className="bg-red-950/80 border border-red-700 text-red-200 text-xs p-3 rounded-lg flex items-center space-x-2">
                 <XCircle className="w-4 h-4 shrink-0 text-red-400" />
                 <span>{errorMessage}</span>
               </div>
@@ -410,13 +410,13 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
             {/* Submit & Progress */}
             {isUploading && (
               <div className="space-y-1.5">
-                <div className="flex justify-between text-xs text-cyan-400">
+                <div className="flex justify-between text-xs text-red-400 font-medium">
                   <span>Extracting Metadata & Executing Quality Verification...</span>
                   <span>{uploadProgress}%</span>
                 </div>
-                <div className="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-800">
+                <div className="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-red-900/40">
                   <div
-                    className="bg-cyan-500 h-full transition-all duration-300"
+                    className="bg-red-500 h-full transition-all duration-300 shadow-sm shadow-red-500"
                     style={{ width: `${uploadProgress}%` }}
                   />
                 </div>
@@ -426,7 +426,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
             <button
               type="submit"
               disabled={isUploading || !sarFile}
-              className="w-full py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-lg shadow transition-colors flex items-center justify-center space-x-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg shadow-lg shadow-red-950/50 transition-all flex items-center justify-center space-x-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Satellite className="w-4 h-4" />
               <span>{isUploading ? 'Ingesting & Analyzing Image...' : 'Upload & Execute Module 1 Quality Check'}</span>
@@ -437,19 +437,19 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
         {/* Right Output Column (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
           {uploadedDataset ? (
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6 shadow-sm">
+            <div className="bg-slate-900 border border-red-900/30 rounded-xl p-6 space-y-6 shadow-md shadow-red-950/20">
               <div className="flex items-center justify-between border-b border-slate-800 pb-4">
                 <div className="flex items-center space-x-2">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                  <CheckCircle2 className="w-5 h-5 text-red-400" />
                   <h2 className="text-base font-semibold text-slate-100">Quality Inspection Report</h2>
                 </div>
                 <span
                   className={`text-xs font-bold px-2.5 py-1 rounded-full border ${
                     uploadedDataset.qualityReport.statusLabel === 'PASSED'
-                      ? 'bg-emerald-950 text-emerald-300 border-emerald-800'
+                      ? 'bg-red-950 text-red-300 border-red-800'
                       : uploadedDataset.qualityReport.statusLabel === 'WARNING'
                       ? 'bg-amber-950 text-amber-300 border-amber-800'
-                      : 'bg-red-950 text-red-300 border-red-800'
+                      : 'bg-rose-950 text-rose-300 border-rose-800'
                   }`}
                 >
                   {uploadedDataset.qualityReport.statusLabel} ({uploadedDataset.qualityReport.score}/100)
@@ -459,7 +459,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
               {/* Image Previews */}
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-slate-950 p-2 rounded border border-slate-800 text-center">
-                  <span className="text-[10px] font-mono text-cyan-400 block mb-1">RAW SAR INGESTED</span>
+                  <span className="text-[10px] font-mono text-red-400 block mb-1">RAW SAR INGESTED</span>
                   <img
                     src={uploadedDataset.sarImageUrl}
                     alt="SAR Ingested"
@@ -468,7 +468,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
                 </div>
                 {uploadedDataset.opticalImageUrl ? (
                   <div className="bg-slate-950 p-2 rounded border border-slate-800 text-center">
-                    <span className="text-[10px] font-mono text-emerald-400 block mb-1">OPTICAL REFERENCE</span>
+                    <span className="text-[10px] font-mono text-rose-400 block mb-1">OPTICAL REFERENCE</span>
                     <img
                       src={uploadedDataset.opticalImageUrl}
                       alt="Optical Ingested"
@@ -484,26 +484,26 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
 
               {/* Quality Metrics Grid */}
               <div className="space-y-3">
-                <h3 className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                <h3 className="text-xs font-semibold text-red-400/90 uppercase tracking-wider">
                   Image Quality Diagnostics
                 </h3>
 
                 <div className="grid grid-cols-2 gap-2 text-xs font-mono">
                   <div className="bg-slate-950 p-2.5 rounded border border-slate-800">
                     <span className="text-[10px] text-slate-500 block">Contrast StdDev</span>
-                    <span className="text-slate-200 font-bold">{uploadedDataset.qualityReport.metrics.stdDevIntensity}</span>
+                    <span className="text-red-400 font-bold">{uploadedDataset.qualityReport.metrics.stdDevIntensity}</span>
                     <span className="text-[10px] text-slate-500 block">(Target &gt; 15)</span>
                   </div>
 
                   <div className="bg-slate-950 p-2.5 rounded border border-slate-800">
                     <span className="text-[10px] text-slate-500 block">Laplacian Variance</span>
-                    <span className="text-slate-200 font-bold">{uploadedDataset.qualityReport.metrics.laplacianVariance}</span>
+                    <span className="text-red-400 font-bold">{uploadedDataset.qualityReport.metrics.laplacianVariance}</span>
                     <span className="text-[10px] text-slate-500 block">(Blur/Noise index)</span>
                   </div>
 
                   <div className="bg-slate-950 p-2.5 rounded border border-slate-800">
                     <span className="text-[10px] text-slate-500 block">Estimated SNR</span>
-                    <span className="text-slate-200 font-bold">{uploadedDataset.qualityReport.metrics.snrEstimateDb} dB</span>
+                    <span className="text-red-400 font-bold">{uploadedDataset.qualityReport.metrics.snrEstimateDb} dB</span>
                     <span className="text-[10px] text-slate-500 block">Signal-to-Noise Ratio</span>
                   </div>
 
@@ -525,7 +525,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
                 <ul className="space-y-1.5 text-xs text-slate-300">
                   {uploadedDataset.qualityReport.reasons.map((r, idx) => (
                     <li key={idx} className="flex items-start space-x-2 bg-slate-950/60 p-2 rounded border border-slate-800/80">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-red-400 mt-0.5 shrink-0" />
                       <span>{r}</span>
                     </li>
                   ))}
@@ -535,7 +535,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
               {/* Action Button */}
               <button
                 onClick={() => onNavigateToPreprocess(uploadedDataset.id)}
-                className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg shadow transition-colors flex items-center justify-center space-x-2 text-sm"
+                className="w-full py-3 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg shadow-lg shadow-red-950/40 transition-colors flex items-center justify-center space-x-2 text-sm"
               >
                 <span>Proceed to Module 2 (PHYS-Net Engine)</span>
                 <ArrowRight className="w-4 h-4" />
@@ -543,7 +543,7 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
             </div>
           ) : (
             <div className="bg-slate-900 border border-slate-800 rounded-xl p-8 text-center space-y-4 shadow-sm flex flex-col items-center justify-center h-full min-h-[420px]">
-              <div className="p-3 bg-cyan-950 text-cyan-400 rounded-full border border-cyan-800">
+              <div className="p-3 bg-red-950/80 text-red-400 rounded-full border border-red-800/60">
                 <Sparkles className="w-8 h-8" />
               </div>
               <div className="space-y-1 max-w-sm">

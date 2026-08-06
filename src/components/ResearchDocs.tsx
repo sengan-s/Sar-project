@@ -21,9 +21,9 @@ export const ResearchDocs: React.FC = () => {
   return (
     <div className="space-y-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-slate-300 text-sm">
       {/* Header Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-2 shadow-sm">
+      <div className="bg-slate-900 border border-red-900/30 rounded-xl p-6 space-y-2 shadow-md shadow-red-950/20">
         <div className="flex items-center space-x-2">
-          <BookOpen className="w-5 h-5 text-purple-400" />
+          <BookOpen className="w-5 h-5 text-red-400" />
           <h1 className="text-xl font-bold text-slate-100">
             Research Paper Implementation Methodology
           </h1>
@@ -38,25 +38,25 @@ export const ResearchDocs: React.FC = () => {
         {/* Module 1 Box */}
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
           <div className="flex items-center space-x-2 border-b border-slate-800 pb-3">
-            <Satellite className="w-5 h-5 text-cyan-400" />
+            <Satellite className="w-5 h-5 text-red-400" />
             <h2 className="font-bold text-slate-100 text-base">Module 1: Data Acquisition Layer</h2>
           </div>
 
           <ul className="space-y-2 text-xs">
             <li className="flex items-start space-x-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
               <span>
                 <strong>Multi-Source SAR Ingestion:</strong> Ingests raw C-Band (Sentinel-1) and X-Band (PAZ, TerraSAR-X) single/dual-polarization imagery along with optical references.
               </span>
             </li>
             <li className="flex items-start space-x-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
               <span>
                 <strong>Automated Quality Audit:</strong> Evaluates contrast standard deviation ($\sigma \ge 15$), dynamic range, and blur/noise via 3x3 Laplacian variance matrix convolution.
               </span>
             </li>
             <li className="flex items-start space-x-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
               <span>
                 <strong>Historical Archive Indexing:</strong> Stores paired dataset metadata, bounding box coordinates, and diagnostic logs in JSON archive store.
               </span>
@@ -67,25 +67,25 @@ export const ResearchDocs: React.FC = () => {
         {/* Module 2 Box */}
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
           <div className="flex items-center space-x-2 border-b border-slate-800 pb-3">
-            <Cpu className="w-5 h-5 text-emerald-400" />
+            <Cpu className="w-5 h-5 text-red-400" />
             <h2 className="font-bold text-slate-100 text-base">Module 2: PHYS-Net Engine</h2>
           </div>
 
           <ul className="space-y-2 text-xs">
             <li className="flex items-start space-x-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
               <span>
                 <strong>Adaptive Lee Despeckling:</strong> Reduces multiplicative speckle noise while preserving high-reflectivity corner scatterers using local window statistics ($W_k$).
               </span>
             </li>
             <li className="flex items-start space-x-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
               <span>
                 <strong>Histogram Equalization:</strong> Equalizes cumulative intensity distribution across $0-255$ spectrum for enhanced flood/burn visibility.
               </span>
             </li>
             <li className="flex items-start space-x-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
               <span>
                 <strong>256x256 Patchification:</strong> Extracts fixed tile grid with configurable overlap stride for direct tensor consumption by Module 3 deep neural network.
               </span>
@@ -116,9 +116,9 @@ export const ResearchDocs: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-slate-800 text-slate-300">
               <tr>
-                <td className="p-3 font-bold text-cyan-400">Adaptive Lee Despeckle Filter</td>
+                <td className="p-3 font-bold text-red-400">Adaptive Lee Despeckle Filter</td>
                 <td className="p-3">
-                  <span className="bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-800">
+                  <span className="bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800 font-bold">
                     REAL & WORKING
                   </span>
                 </td>
@@ -128,9 +128,9 @@ export const ResearchDocs: React.FC = () => {
               </tr>
 
               <tr>
-                <td className="p-3 font-bold text-cyan-400">Histogram Equalization</td>
+                <td className="p-3 font-bold text-red-400">Histogram Equalization</td>
                 <td className="p-3">
-                  <span className="bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-800">
+                  <span className="bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800 font-bold">
                     REAL & WORKING
                   </span>
                 </td>
@@ -140,9 +140,9 @@ export const ResearchDocs: React.FC = () => {
               </tr>
 
               <tr>
-                <td className="p-3 font-bold text-cyan-400">Quality Check (Laplacian Var)</td>
+                <td className="p-3 font-bold text-red-400">Quality Check (Laplacian Var)</td>
                 <td className="p-3">
-                  <span className="bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-800">
+                  <span className="bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800 font-bold">
                     REAL & WORKING
                   </span>
                 </td>
@@ -152,9 +152,9 @@ export const ResearchDocs: React.FC = () => {
               </tr>
 
               <tr>
-                <td className="p-3 font-bold text-cyan-400">256x256 Patchify Grid Generator</td>
+                <td className="p-3 font-bold text-red-400">256x256 Patchify Grid Generator</td>
                 <td className="p-3">
-                  <span className="bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-800">
+                  <span className="bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800 font-bold">
                     REAL & WORKING
                   </span>
                 </td>
@@ -176,9 +176,9 @@ export const ResearchDocs: React.FC = () => {
               </tr>
 
               <tr>
-                <td className="p-3 font-bold text-amber-400">Module 3 Deep Learning Core</td>
+                <td className="p-3 font-bold text-rose-400">Module 3 Deep Learning Core</td>
                 <td className="p-3">
-                  <span className="bg-purple-950 text-purple-400 px-2 py-0.5 rounded border border-purple-800">
+                  <span className="bg-rose-950 text-rose-400 px-2 py-0.5 rounded border border-rose-800">
                     OUT OF SCOPE
                   </span>
                 </td>
@@ -194,16 +194,16 @@ export const ResearchDocs: React.FC = () => {
       {/* Code Snippet Mapping Reference */}
       <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4 shadow-sm">
         <h2 className="text-base font-bold text-slate-100 flex items-center space-x-2">
-          <Code className="w-5 h-5 text-cyan-400" />
+          <Code className="w-5 h-5 text-red-400" />
           <span>Codebase Architecture Mapping</span>
         </h2>
 
         <div className="space-y-2 font-mono text-xs text-slate-300 bg-slate-950 p-4 rounded-lg border border-slate-800">
-          <div className="text-cyan-400 font-bold">// Backend Image Processing Pipeline (server/sar_engine.ts)</div>
+          <div className="text-red-400 font-bold">// Backend Image Processing Pipeline (server/sar_engine.ts)</div>
           <div>• Module 1: extractImageMetadata() & performQualityCheck()</div>
           <div>• Module 2: applyLeeDespeckleFilter() & applyHistogramEqualization()</div>
           <div>• Module 2: alignOpticalToSar() & createPatchGrid()</div>
-          <div className="pt-2 text-emerald-400 font-bold">// Frontend React Component Hierarchy (src/components/)</div>
+          <div className="pt-2 text-rose-400 font-bold">// Frontend React Component Hierarchy (src/components/)</div>
           <div>• Module 1 UI: Module1Upload.tsx (Ingestion & Quality Audit)</div>
           <div>• Module 1 Archive UI: Module1Archive.tsx (Historical Dataset Index)</div>
           <div>• Module 2 UI: Module2Preprocessing.tsx (PHYS-Net Interactive Dashboard)</div>

@@ -174,7 +174,11 @@ export async function initializeSampleDatasets(
   const width = 512;
   const height = 512;
 
-  await fs.mkdir(uploadsDir, { recursive: true });
+  try {
+    await fs.mkdir(uploadsDir, { recursive: true });
+  } catch {
+    // Read-only filesystem handling
+  }
 
   for (const cfg of SAMPLE_CONFIGS) {
     const sarFilePath = path.join(uploadsDir, cfg.filename);
@@ -192,8 +196,12 @@ export async function initializeSampleDatasets(
       sarBuffer = await sharp(sarPixels, { raw: { width, height, channels: 1 } }).png().toBuffer();
       opticalBuffer = await createSyntheticOpticalBuffer(width, height, cfg.type);
 
-      await fs.writeFile(sarFilePath, sarBuffer);
-      await fs.writeFile(opticalFilePath, opticalBuffer);
+      try {
+        await fs.writeFile(sarFilePath, sarBuffer);
+        await fs.writeFile(opticalFilePath, opticalBuffer);
+      } catch (writeErr) {
+        console.warn('[SERVERLESS WARN] Could not write sample image files to disk:', writeErr);
+      }
     }
 
     // Extract metadata

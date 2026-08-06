@@ -456,7 +456,11 @@ export async function createPatchGrid(
   let rowIndex = 0;
   let colIndex = 0;
 
-  await fs.mkdir(outputDir, { recursive: true });
+  try {
+    await fs.mkdir(outputDir, { recursive: true });
+  } catch {
+    // Read-only filesystem handling
+  }
 
   const rawPixels = await sharp(processedBuffer)
     .grayscale()
@@ -475,7 +479,11 @@ export async function createPatchGrid(
         .png()
         .toBuffer();
 
-      await fs.writeFile(patchFilePath, patchBuffer);
+      try {
+        await fs.writeFile(patchFilePath, patchBuffer);
+      } catch {
+        // Read-only fallback
+      }
 
       // Compute statistics for this tile
       let patchSum = 0;
@@ -607,10 +615,14 @@ export async function runPHYSNetPipeline(
 
   // Save Processed SAR Image to Disk
   const processedDir = path.join(uploadsDir, 'processed');
-  await fs.mkdir(processedDir, { recursive: true });
   const processedFilename = `processed_${datasetId}.png`;
   const processedFilePath = path.join(processedDir, processedFilename);
-  await fs.writeFile(processedFilePath, processedBuffer);
+  try {
+    await fs.mkdir(processedDir, { recursive: true });
+    await fs.writeFile(processedFilePath, processedBuffer);
+  } catch (err) {
+    console.warn('[SERVERLESS WARN] Write processed image to disk skipped:', err);
+  }
 
   // 3. CO-REGISTRATION ALIGNMENT (If optical image exists)
   let alignmentResult: AlignmentResult | undefined;
@@ -618,7 +630,11 @@ export async function runPHYSNetPipeline(
     const { alignedBuffer, alignment } = await alignOpticalToSar(opticalBuffer, width, height);
     const alignedFilename = `aligned_optical_${datasetId}.png`;
     const alignedFilePath = path.join(processedDir, alignedFilename);
-    await fs.writeFile(alignedFilePath, alignedBuffer);
+    try {
+      await fs.writeFile(alignedFilePath, alignedBuffer);
+    } catch (err) {
+      console.warn('[SERVERLESS WARN] Write aligned optical image to disk skipped:', err);
+    }
     alignment.alignedOpticalUrl = `/uploads/processed/${alignedFilename}`;
     alignmentResult = alignment;
   }

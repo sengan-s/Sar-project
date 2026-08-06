@@ -18,24 +18,41 @@ import {
   runPHYSNetPipeline,
 } from './server/sar_engine.js';
 import { initializeSampleDatasets } from './server/sample_generator.js';
+import os from 'os';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = 3000;
-const UPLOADS_DIR = path.join(process.cwd(), 'public', 'uploads');
-const ARCHIVE_FILE = path.join(UPLOADS_DIR, 'archive.json');
-const PREPROCESS_RESULTS_FILE = path.join(UPLOADS_DIR, 'preprocess_results.json');
+const PRIMARY_UPLOADS_DIR = path.join(process.cwd(), 'public', 'uploads');
+const TMP_UPLOADS_DIR = path.join(os.tmpdir(), 'sar_uploads');
+let UPLOADS_DIR = PRIMARY_UPLOADS_DIR;
+
+async function resolveUploadsDir(): Promise<string> {
+  try {
+    await fs.mkdir(PRIMARY_UPLOADS_DIR, { recursive: true });
+    const testFile = path.join(PRIMARY_UPLOADS_DIR, `.write_test_${Date.now()}`);
+    await fs.writeFile(testFile, 'test');
+    await fs.unlink(testFile);
+    UPLOADS_DIR = PRIMARY_UPLOADS_DIR;
+    return PRIMARY_UPLOADS_DIR;
+  } catch {
+    // Read-only filesystem detected (e.g., Vercel serverless functions / AWS Lambda)
+    await fs.mkdir(TMP_UPLOADS_DIR, { recursive: true });
+    UPLOADS_DIR = TMP_UPLOADS_DIR;
+    return TMP_UPLOADS_DIR;
+  }
+}
 
 // Memory + JSON file store
 let datasetsArchive: SARDatasetMetadata[] = [];
 let preprocessingResultsStore: Record<string, PreprocessingResult> = {};
 
-// Configure Multer storage
+// Configure Multer storage with dynamic destination
 const storage = multer.diskStorage({
   destination: async (req, file, cb) => {
-    await fs.mkdir(UPLOADS_DIR, { recursive: true });
-    cb(null, UPLOADS_DIR);
+    const dir = await resolveUploadsDir();
+    cb(null, dir);
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
@@ -50,13 +67,20 @@ const upload = multer({
 });
 
 async function saveArchive() {
-  await fs.mkdir(UPLOADS_DIR, { recursive: true });
-  await fs.writeFile(ARCHIVE_FILE, JSON.stringify(datasetsArchive, null, 2));
+  try {
+    const dir = await resolveUploadsDir();
+    const archiveFile = path.join(dir, 'archive.json');
+    await fs.writeFile(archiveFile, JSON.stringify(datasetsArchive, null, 2));
+  } catch (err) {
+    console.warn('[SERVERLESS WARN] Could not write archive.json to disk (in-memory mode enabled):', err);
+  }
 }
 
 async function loadArchive() {
   try {
-    const data = await fs.readFile(ARCHIVE_FILE, 'utf-8');
+    const dir = await resolveUploadsDir();
+    const archiveFile = path.join(dir, 'archive.json');
+    const data = await fs.readFile(archiveFile, 'utf-8');
     datasetsArchive = JSON.parse(data);
   } catch {
     datasetsArchive = [];
@@ -64,26 +88,35 @@ async function loadArchive() {
 }
 
 async function savePreprocessResults() {
-  await fs.mkdir(UPLOADS_DIR, { recursive: true });
-  await fs.writeFile(PREPROCESS_RESULTS_FILE, JSON.stringify(preprocessingResultsStore, null, 2));
+  try {
+    const dir = await resolveUploadsDir();
+    const resultsFile = path.join(dir, 'preprocess_results.json');
+    await fs.writeFile(resultsFile, JSON.stringify(preprocessingResultsStore, null, 2));
+  } catch (err) {
+    console.warn('[SERVERLESS WARN] Could not write preprocess_results.json to disk (in-memory mode enabled):', err);
+  }
 }
 
 async function loadPreprocessResults() {
   try {
-    const data = await fs.readFile(PREPROCESS_RESULTS_FILE, 'utf-8');
+    const dir = await resolveUploadsDir();
+    const resultsFile = path.join(dir, 'preprocess_results.json');
+    const data = await fs.readFile(resultsFile, 'utf-8');
     preprocessingResultsStore = JSON.parse(data);
   } catch {
     preprocessingResultsStore = {};
   }
 }
 
+const app = express();
+
 async function startServer() {
-  const app = express();
   app.use(express.json());
 
-  // Static directory for uploads
-  await fs.mkdir(UPLOADS_DIR, { recursive: true });
-  app.use('/uploads', express.static(UPLOADS_DIR));
+  // Static directory for uploads (supports both primary public/uploads and /tmp/sar_uploads)
+  await resolveUploadsDir();
+  app.use('/uploads', express.static(PRIMARY_UPLOADS_DIR));
+  app.use('/uploads', express.static(TMP_UPLOADS_DIR));
 
   // Initialize archive & sample data
   await loadArchive();
@@ -394,3 +427,6 @@ async function startServer() {
 }
 
 startServer();
+
+export default app;
+

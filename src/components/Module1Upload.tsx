@@ -120,8 +120,18 @@ export const Module1Upload: React.FC<Module1UploadProps> = ({
       setUploadProgress(80);
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to upload SAR image');
+        let errorMsg = 'Failed to upload SAR image';
+        if (response.status === 413) {
+          errorMsg = 'File size exceeds serverless upload limit (4.5 MB on Vercel). Please upload a smaller image file or compressed PNG/JPG.';
+        } else {
+          try {
+            const errorData = await response.json();
+            errorMsg = errorData.error || errorMsg;
+          } catch {
+            errorMsg = `Upload failed (${response.status} ${response.statusText}). Check serverless function logs.`;
+          }
+        }
+        throw new Error(errorMsg);
       }
 
       const data = await response.json();
